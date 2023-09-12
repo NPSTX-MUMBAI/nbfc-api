@@ -28,6 +28,7 @@ export class PlanRepository {
           }
           return a`,
         {
+          accountId: accountId,
           emiDate: body.emiDate,
           disbursementAmount: body.disbursementAmount,
           emiAmount: body.emiAmount,
