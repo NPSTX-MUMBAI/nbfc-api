@@ -58,6 +58,21 @@ export class PlanRepository {
     }
   }
 
-  
+  async GetAccount(){
+    try {
+      const query = await this.neo.read(`match (a:account) return a`)
+      const data = query.records.map((record) => record.get('a').properties);
+      return query.records.length > 0
+        ? {
+            data: data,
+            status: true,
+            msg: 'success',
+          }
+        : { data: null, status: false, msg: 'failed' };
+    } catch (error) {
+      Logger.log('error' + error, 'planRepository');
+      return { res: error, status: false, msg: 'error occurred !' };
+    }
+  }
  
 }

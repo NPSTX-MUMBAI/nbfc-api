@@ -14,6 +14,16 @@ export class PlanService {
       return { res: error, status: false, msg: 'error occurred !' };
     }
   }
+    async GetAccount(){
+      try {
+        const query = await this.plan.GetAccount();
+        return query;
+      } catch (error) {
+        Logger.log('error' + error, 'planService');
+        return { res: error, status: false, msg: 'error occurred !' };
+      }
+
+  }
 
  
 }
