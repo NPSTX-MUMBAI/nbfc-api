@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
@@ -6,6 +6,10 @@ import { PlanModule } from './plan/plan.module';
 import { Neo4jModule } from 'nest-neo4j';
 import { environment } from './env/environment';
 require('dotenv').config();
+Logger.log('neo4j PORT :' + process.env.PORT, 'appModule');
+Logger.log('neo4j HOST :' + process.env.HOST, 'appModule');
+Logger.log('neo4j User Name :' + environment.username, 'appModule');
+
 
 @Module({
   imports: [
