@@ -11,4 +11,5 @@ export class CreatePlanDto {
   lastName: string;
   mobileNo: string;
   email: string;
+  frequency: string;
 }

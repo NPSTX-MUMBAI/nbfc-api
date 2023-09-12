@@ -9,9 +9,9 @@ export class PlanRepository {
 
   async createPlan(body: CreatePlanDto) {
     try {
-      const accountId = generateRandomString(10);
+      const accountNo = generateRandomString(10);
       const query = await this.neo.write(
-        `merge (a:account {accountId: $accountId})
+        `merge (a:account {accountId: $accountNo})
           on create set a +={
             emiDate: $emiDate,
             disbursementAmount: $disbursementAmount,
@@ -25,10 +25,11 @@ export class PlanRepository {
             lastName: $lastName,
             mobileNo: $mobileNo,
             email: $email,
+            frequency: $frequency
           }
           return a`,
         {
-          accountId: accountId,
+          accountNo: accountNo,
           emiDate: body.emiDate,
           disbursementAmount: body.disbursementAmount,
           emiAmount: body.emiAmount,
@@ -41,6 +42,7 @@ export class PlanRepository {
           lastName: body.lastName,
           mobileNo: body.mobileNo,
           email: body.email,
+          frequency: body.frequency,
         },
       );
       return query.records.length > 0
@@ -56,5 +58,6 @@ export class PlanRepository {
     }
   }
 
+  
  
 }
