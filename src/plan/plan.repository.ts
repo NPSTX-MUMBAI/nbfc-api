@@ -13,20 +13,33 @@ export class PlanRepository {
       const query = await this.neo.write(
         `merge (a:account {accountId: $accountId})
           on create set a +={
-              emiDate: $emiDate,
-              disbursementAmount:$disbursementAmount,
-              approved: $approved,
-              emi: $emi,
-              autoPayStatus: $autoPayStatus
+            emiDate: $emiDate,
+            disbursementAmount: $disbursementAmount,
+            emiAmount: $emiAmount,
+            startDate: $startDate,
+            endDate: $endDate,
+            dueDate: $dueDate,
+            address: $address,
+            loanType: $loanType,
+            firstName: $firstName,
+            lastName: $lastName,
+            mobileNo: $mobileNo,
+            email: $email,
           }
           return a`,
         {
-          accountId: accountId,
           emiDate: body.emiDate,
           disbursementAmount: body.disbursementAmount,
-          approved: body.approved,
-          emi: body.emi,
-          autoPayStatus: body.autoPayStatus,
+          emiAmount: body.emiAmount,
+          startDate: body.startDate,
+          endDate: body.endDate,
+          dueDate: body.dueDate,
+          address: body.address,
+          loanType: body.loanType,
+          firstName: body.firstName,
+          lastName: body.lastName,
+          mobileNo: body.mobileNo,
+          email: body.email,
         },
       );
       return query.records.length > 0
@@ -41,4 +54,6 @@ export class PlanRepository {
       return { res: error, status: false, msg: 'error occurred !' };
     }
   }
+
+ 
 }

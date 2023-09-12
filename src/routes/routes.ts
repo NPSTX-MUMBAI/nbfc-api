@@ -1,4 +1,4 @@
 export const plan = {
     Controller: 'plan',
-    CreatePlan:'create/Plan',
+    CreateAccount:'create/account',
 }

@@ -1,7 +1,14 @@
 export class CreatePlanDto {
-    emiDate: string;
-    disbursementAmount: string;
-    approved: string;
-    emi: string;
-    autoPayStatus: string;
+  emiDate: string;
+  disbursementAmount: string;
+  emiAmount: string;
+  startDate: string;
+  endDate: string;
+  dueDate: string;
+  address: string;
+  loanType: string;
+  firstName: string;
+  lastName: string;
+  mobileNo: string;
+  email: string;
 }

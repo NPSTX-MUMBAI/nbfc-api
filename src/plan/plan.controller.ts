@@ -7,7 +7,7 @@ import { plan } from 'src/routes/routes';
 export class PlanController {
   constructor(private readonly planService: PlanService) {}
 
-  @Post(plan.CreatePlan)
+  @Post(plan.CreateAccount)
   createPlan(@Body() body: CreatePlanDto) {
     return this.planService.createPlan(body);
   }
