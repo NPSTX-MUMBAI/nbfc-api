@@ -1,95 +1,12 @@
 {
-
-    "project_info": {
-  
-      "project_number": "709841661367",
-  
-      "project_id": "nbfc-autopay",
-  
-      "storage_bucket": "nbfc-autopay.appspot.com"
-  
-    },
-  
-    "client": [
-  
-      {
-  
-        "client_info": {
-  
-          "mobilesdk_app_id": "1:709841661367:android:ffcf3d7e9c364d47f28c32",
-  
-          "android_client_info": {
-  
-            "package_name": "com.npstx.nbfc.reactapp"
-  
-          }
-  
-        },
-  
-        "oauth_client": [],
-  
-        "api_key": [
-  
-          {
-  
-            "current_key": "AAAApUXcLbc:APA91bG6lNjW2YBnd9nhG3CTuNYvgeyZNYiajyZjP_1XZ3fUE1CgHc950xIjdltgI91tGkZd2uz9C-BXB3yGqTN2GSRr4LdfRcAbJz990nBB9B-MRYoF3MAuYekfIra8fQltCXqyFGjo"
-  
-          }
-  
-        ],
-  
-        "services": {
-  
-          "appinvite_service": {
-  
-            "other_platform_oauth_client": []
-  
-          }
-  
-        }
-  
-      },
-  
-      {
-  
-        "client_info": {
-  
-          "mobilesdk_app_id": "1:709841661367:android:4e21b0404e7ec9adf28c32",
-  
-          "android_client_info": {
-  
-            "package_name": "com.vishalpotinda2608.NBFC"
-  
-          }
-  
-        },
-  
-        "oauth_client": [],
-  
-        "api_key": [
-  
-          {
-  
-            "current_key": "AIzaSyDAsSD70fvPNdRWgB8cvYNuKqda5TIVncs"
-  
-          }
-  
-        ],
-  
-        "services": {
-  
-          "appinvite_service": {
-  
-            "other_platform_oauth_client": []
-  
-          }
-  
-        }
-  
-      }
-  
-    ],
-  
-    "configuration_version": "1"
-  
-  }
+  "type": "service_account",
+  "project_id": "your-project-id",
+  "private_key_id": "your-private-key-id",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nYourPrivateKeyHere\n-----END PRIVATE KEY-----\n",
+  "client_email": "your-service-account-email@your-project-id.iam.gserviceaccount.com",
+  "client_id": "your-client-id",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account-email%40your-project-id.iam.gserviceaccount.com"
+}
