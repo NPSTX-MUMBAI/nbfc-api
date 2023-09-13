@@ -1,0 +1,95 @@
+{
+
+    "project_info": {
+  
+      "project_number": "709841661367",
+  
+      "project_id": "nbfc-autopay",
+  
+      "storage_bucket": "nbfc-autopay.appspot.com"
+  
+    },
+  
+    "client": [
+  
+      {
+  
+        "client_info": {
+  
+          "mobilesdk_app_id": "1:709841661367:android:ffcf3d7e9c364d47f28c32",
+  
+          "android_client_info": {
+  
+            "package_name": "com.npstx.nbfc.reactapp"
+  
+          }
+  
+        },
+  
+        "oauth_client": [],
+  
+        "api_key": [
+  
+          {
+  
+            "current_key": "AAAApUXcLbc:APA91bG6lNjW2YBnd9nhG3CTuNYvgeyZNYiajyZjP_1XZ3fUE1CgHc950xIjdltgI91tGkZd2uz9C-BXB3yGqTN2GSRr4LdfRcAbJz990nBB9B-MRYoF3MAuYekfIra8fQltCXqyFGjo"
+  
+          }
+  
+        ],
+  
+        "services": {
+  
+          "appinvite_service": {
+  
+            "other_platform_oauth_client": []
+  
+          }
+  
+        }
+  
+      },
+  
+      {
+  
+        "client_info": {
+  
+          "mobilesdk_app_id": "1:709841661367:android:4e21b0404e7ec9adf28c32",
+  
+          "android_client_info": {
+  
+            "package_name": "com.vishalpotinda2608.NBFC"
+  
+          }
+  
+        },
+  
+        "oauth_client": [],
+  
+        "api_key": [
+  
+          {
+  
+            "current_key": "AIzaSyDAsSD70fvPNdRWgB8cvYNuKqda5TIVncs"
+  
+          }
+  
+        ],
+  
+        "services": {
+  
+          "appinvite_service": {
+  
+            "other_platform_oauth_client": []
+  
+          }
+  
+        }
+  
+      }
+  
+    ],
+  
+    "configuration_version": "1"
+  
+  }
