@@ -1,7 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { CreatePlanDto } from './dto/create-plan.dto';
 import { Neo4jService } from 'nest-neo4j/dist';
-import { generateRandomString } from 'src/constant/number';
+import {
+  generateRandomString,
+  generateRandomNumber,
+} from 'src/constant/number';
+import { createAutoPay } from './dto/create-autopay.dto';
 
 @Injectable()
 export class PlanRepository {
@@ -9,9 +13,10 @@ export class PlanRepository {
 
   async createPlan(body: CreatePlanDto) {
     try {
-      const accountNo = generateRandomString(10);
+      const accountId = generateRandomString(10);
+      const accountNo = generateRandomNumber();
       const query = await this.neo.write(
-        `merge (a:account {accountId: $accountNo})
+        `merge (a:account {accountId: $accountId})
           on create set a +={
             emiDate: $emiDate,
             disbursementAmount: $disbursementAmount,
@@ -25,10 +30,12 @@ export class PlanRepository {
             lastName: $lastName,
             mobileNo: $mobileNo,
             email: $email,
-            frequency: $frequency
+            accountNo: $accountNo,
+            status: "INACTIVE"
           }
           return a`,
         {
+          accountId: accountId,
           accountNo: accountNo,
           emiDate: body.emiDate,
           disbursementAmount: body.disbursementAmount,
@@ -42,7 +49,6 @@ export class PlanRepository {
           lastName: body.lastName,
           mobileNo: body.mobileNo,
           email: body.email,
-          frequency: body.frequency,
         },
       );
       return query.records.length > 0
@@ -58,21 +64,41 @@ export class PlanRepository {
     }
   }
 
-  async GetAccount(){
+  async createAutoPay(body: createAutoPay) {
     try {
-      const query = await this.neo.read(`match (a:account) return a`)
-      const data = query.records.map((record) => record.get('a').properties);
+      const query = await this.neo.write(
+        `match (a:account {accountId: $accountId}) 
+      merge (a)-[:HAS_AUTOPAY]->(p:autoPay)
+      on create set p +={
+          startDate: $startDate,
+          endDate: $endDate,
+          amount: $amount,
+          upiId: $upiId,
+          vpa: $vpa
+      }
+      set a +={
+        status: "PENDING"
+      }
+      return a, p`,
+        {
+          startDate: body.startDate,
+          endDate: body.endDate,
+          amount: body.amount,
+          upiId: body.upiId,
+          vpa: body.vpa,
+          accountId: body.accountId,
+        },
+      );
       return query.records.length > 0
-        ? {
-            data: data,
-            status: true,
-            msg: 'success',
-          }
-        : { data: null, status: false, msg: 'failed' };
+      ? {
+          data: query.records[0].get('p').properties,
+          status: true,
+          msg: 'success',
+        }
+      : { data: null, status: false, msg: 'failed' };
     } catch (error) {
       Logger.log('error' + error, 'planRepository');
       return { res: error, status: false, msg: 'error occurred !' };
     }
   }
- 
 }
