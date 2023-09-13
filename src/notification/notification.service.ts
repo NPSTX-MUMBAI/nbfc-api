@@ -1,24 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNotificationDto } from './dto/create-notification.dto';
 import { UpdateNotificationDto } from './dto/update-notification.dto';
-import admin from './firebase-admin.service';
 
 @Injectable()
 export class NotificationService {
-  async sendNotificationToDevice(token: string, title: string, body: string) {
-    const message = {
-      notification: {
-        title,
-        body,
-      },
-      token,
-    };
+  create(createNotificationDto: CreateNotificationDto) {
+    return 'This action adds a new notification';
+  }
 
-    try {
-      const response = await admin.messaging().send(message);
-      console.log('Successfully sent notification:', response);
-    } catch (error) {
-      console.error('Error sending notification:', error);
-    }
+  findAll() {
+    return `This action returns all notification`;
+  }
+
+  findOne(id: number) {
+    return `This action returns a #${id} notification`;
+  }
+
+  update(id: number, updateNotificationDto: UpdateNotificationDto) {
+    return `This action updates a #${id} notification`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} notification`;
   }
 }

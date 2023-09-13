@@ -7,6 +7,7 @@ import { Neo4jModule } from 'nest-neo4j';
 import { environment } from './env/environment';
 import { CommonService } from './common/common.service';
 import { NotificationModule } from './notification/notification.module';
+
 require('dotenv').config();
 Logger.log('neo4j PORT :' + process.env.PORT, 'appModule');
 Logger.log('neo4j HOST :' + process.env.HOST, 'appModule');

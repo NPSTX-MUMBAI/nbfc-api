@@ -7,13 +7,28 @@ import { UpdateNotificationDto } from './dto/update-notification.dto';
 export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
 
-  @Post('send')
-  async sendNotification(
-    @Body('token') token: string,
-    @Body('title') title: string,
-    @Body('body') body: string,
-  ) {
-    await this.notificationService.sendNotificationToDevice(token, title, body);
-    return { success: true, message: 'Notification sent successfully' };
+  @Post()
+  create(@Body() createNotificationDto: CreateNotificationDto) {
+    return this.notificationService.create(createNotificationDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.notificationService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.notificationService.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateNotificationDto: UpdateNotificationDto) {
+    return this.notificationService.update(+id, updateNotificationDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.notificationService.remove(+id);
   }
 }
