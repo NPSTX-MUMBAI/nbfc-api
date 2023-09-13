@@ -12,10 +12,6 @@ export class AuthController {
     return this.authService.create(createAuthDto);
   }
 
-  @Post('test')
-  create2(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
-  }
 
 
 

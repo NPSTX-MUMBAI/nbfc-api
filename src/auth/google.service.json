@@ -1,12 +1,13 @@
 {
   "type": "service_account",
-  "project_id": "your-project-id",
-  "private_key_id": "your-private-key-id",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nYourPrivateKeyHere\n-----END PRIVATE KEY-----\n",
-  "client_email": "your-service-account-email@your-project-id.iam.gserviceaccount.com",
-  "client_id": "your-client-id",
+  "project_id": "nbfc-autopay",
+  "private_key_id": "bc9097cbd77c8dd27901438041fd2a5f991e0811",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC4Qgc7Nh1STg7e\nnmsb9rWYjRtenk3yd7vwBfca7cihZDHjFjsx4E9OlFtNl2Ka09I6iiGeeTvCojLi\n66Ay0Pg6FX2/lwEKlQ9ypwN0d+fCApJbwzK0P5CTPhu/4XkKtWu4B6GOb9F0bZKA\nSQS+QYggo0xcARBPnzJC1z8wQeslTqK4pZ7qERBVcfNY6NXh4WiKDmeidKN9lGgd\nEPKpQWPpIn0sAV+bMRF7oqPJ+UK4+C7+BffSOCl6JqXLoATzS/sTcjmRKHfGI4EG\nRLDlq21OIIlnicATqSzasBo5al2SFZbJ6FAIWON8A3buKHr/5t5rdun6RhR6zGYW\nrfDUoKTxAgMBAAECggEAJpIz31JBqxQKCtIQy+bGNuv6+cCbwpEL93/YLXvvTtGh\nm87wj01MbL+jqUdybcS/sl9uEDWCrAi2LEh03Y5fGBGdpDihEC0J8c9CauQa0MMn\nDix7db4Err4GoxE4/GPj6781M5L2vq+dRluCsa0YKPTmLDBQ0MobhGB4qspxxfoo\nHXYcu4c/hM9WYwL8SNHlZ+mLLJySjLtGVsgJlqowHO3Ye5UcCiSJjE8NTA70eyh+\nQVYcJqNj0lg6bxmCFDrCsEIX9+WXT0odpICdIqLVUpWoQHWT40mmr5/q5iLUV5XB\n5E1ZzOmKNftn7/nKNhgqo80uYbZiCnTCi0dh5gsiEQKBgQDgcyc2mdJ1aqmxoZGF\nbbDiZiRe8g7f8HPJWc/y0LFMsJ33PcUBC1sZKoop7M5RGgC4YsCYGAb6u4kSD/0Z\n0e2KtcsX9ZfYl28WbFn4uhJ97RxhcRxBo412kTTAPbXQotSzNrtjBgm38IPM26RR\nPIPPIKw452xkPNsTTtyFW2wVFQKBgQDSKJDu+PiNvez59gOPwMlY5It/3oMAYMZ4\nnr9XT+Y7BxGbC8hY1BWR5L40gHC0Vq1knwiWoWa11MOqspZWj/PaZJ4Aj3/93eXe\nCmos+pPXct/dbm9ae2zKlZEsmbmxG+ycQRpptehn4eceSABrE4aTPUj7GdCkkEtI\n0LOifp2/bQKBgGFKiRzp4Ih1C8mrt2CXA62fiPR/CGOZ3xbQj4s5WyFbDZ42cEbb\nnUlzXyB9PZF6LAXBCKrk/2GAGRJzS8r9bHJMCxT/qCqCueyGWxmtzoY3Wa4DUbRC\nKPfUSYFrPnyJmJl2iBOMcnoBD6ClNLzh9mC6UOz5o8pvdqcP8Bb+YgNhAoGBALmW\nr18KKN1rUuHu2nhRZL4Gnhae1os36y1L62dcnNGVzXthbVzcdevv1/SfVGg9f0Qz\nmS8Ee6KpsN2GdnMdDtjXMB0InJwBIGT0R41O/84smPt/8gAyrQE+EgUUAEMiiNH4\nQC4IQaOzgBlitlPY22gdn9x3kKQy9PjprSkbrY0FAoGABFz/td6g91iMzrARDDDt\nxu3A6saSf7xtJjMtWvHSsjF4En/Ro/v/K4K+rGoW6tGWFdWVwXMwdCy+7sQXxec6\ntKsUuHQA85OSnKAG8FVUYTrwfqFDm6l1Y3O3EAV4O7jArrf8Oh4Tb5sdqvoFMV0w\nP9vNfTVrXIsmCpLL797pcds=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-agwhy@nbfc-autopay.iam.gserviceaccount.com",
+  "client_id": "113444237209533045630",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account-email%40your-project-id.iam.gserviceaccount.com"
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-agwhy%40nbfc-autopay.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
 }

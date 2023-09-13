@@ -19,7 +19,12 @@ export class PlanController {
   }
 
   @Get(plan.GetAccount)
-  GetAccount() {
+  getAccount() {
+    return this.planService.GetAccount();
+  }
+
+  @Get("test")
+  test() {
     return this.planService.GetAccount();
   }
 }
