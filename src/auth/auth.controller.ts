@@ -12,8 +12,6 @@ export class AuthController {
     return this.authService.create(createAuthDto);
   }
 
-
-
   @Post('send')
   async sendNotification(
     @Body('token') token: string,
