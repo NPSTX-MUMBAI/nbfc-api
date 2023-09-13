@@ -5,6 +5,7 @@ import {
   generateRandomString,
   generateRandomNumber,
 } from 'src/constant/number';
+import { createAutoPay } from './dto/create-autopay.dto';
 
 @Injectable()
 export class PlanRepository {
@@ -57,6 +58,44 @@ export class PlanRepository {
             msg: 'success',
           }
         : { data: null, status: false, msg: 'failed' };
+    } catch (error) {
+      Logger.log('error' + error, 'planRepository');
+      return { res: error, status: false, msg: 'error occurred !' };
+    }
+  }
+
+  async createAutoPay(body: createAutoPay) {
+    try {
+      const query = await this.neo.write(
+        `match (a:account {accountId: $accountId}) 
+      merge (a)-[:HAS_AUTOPAY]->(p:autoPay)
+      on create set p +={
+          startDate: $startDate,
+          endDate: $endDate,
+          amount: $amount,
+          upiId: $upiId,
+          vpa: $vpa
+      }
+      set a +={
+        status: "PENDING"
+      }
+      return a, p`,
+        {
+          startDate: body.startDate,
+          endDate: body.endDate,
+          amount: body.amount,
+          upiId: body.upiId,
+          vpa: body.vpa,
+          accountId: body.accountId,
+        },
+      );
+      return query.records.length > 0
+      ? {
+          data: query.records[0].get('p').properties,
+          status: true,
+          msg: 'success',
+        }
+      : { data: null, status: false, msg: 'failed' };
     } catch (error) {
       Logger.log('error' + error, 'planRepository');
       return { res: error, status: false, msg: 'error occurred !' };
