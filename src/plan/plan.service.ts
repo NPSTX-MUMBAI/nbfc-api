@@ -22,7 +22,6 @@ export class PlanService {
         Logger.log('error' + error, 'planService');
         return { res: error, status: false, msg: 'error occurred !' };
       }
-
   }
 
  
