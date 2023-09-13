@@ -11,4 +11,12 @@ export class CreatePlanDto {
   lastName: string;
   mobileNo: string;
   email: string;
+  status: status;
 }
+
+
+export enum status {
+    'INACTIVE' = 'INACTIVE',
+    'ACTIVE' = 'ACTIVE',
+    'PENDING' = 'PENDING',
+  }

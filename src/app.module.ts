@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { PlanModule } from './plan/plan.module';
 import { Neo4jModule } from 'nest-neo4j';
 import { environment } from './env/environment';
+import { CommonService } from './common/common.service';
 require('dotenv').config();
 Logger.log('neo4j PORT :' + process.env.PORT, 'appModule');
 Logger.log('neo4j HOST :' + process.env.HOST, 'appModule');
@@ -24,6 +25,6 @@ Logger.log('neo4j User Name :' + environment.username, 'appModule');
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CommonService],
 })
 export class AppModule {}
