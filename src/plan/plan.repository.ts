@@ -73,8 +73,8 @@ export class PlanRepository {
           startDate: $startDate,
           endDate: $endDate,
           amount: $amount,
-          upiId: $upiId,
-          vpa: $vpa
+          vpa: $vpa, 
+          frequency: $frequency
       }
       set a +={
         status: "PENDING"
@@ -84,9 +84,9 @@ export class PlanRepository {
           startDate: body.startDate,
           endDate: body.endDate,
           amount: body.amount,
-          upiId: body.upiId,
           vpa: body.vpa,
           accountId: body.accountId,
+          frequency: body.frequency,
         },
       );
       return query.records.length > 0

@@ -39,9 +39,9 @@ export class PlanService {
           startDate: match.data.startDate,
           endDate: match.data.endDate,
           amount: body.amount,
-          upiId: body.upiId,
           vpa: body.vpa,
           accountId: body.accountId,
+          frequency: body.frequency,
         });
         return query;
       } else {
