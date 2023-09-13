@@ -6,7 +6,7 @@ import { PlanModule } from './plan/plan.module';
 import { Neo4jModule } from 'nest-neo4j';
 import { environment } from './env/environment';
 import { CommonService } from './common/common.service';
-import { NotificationModule } from './notification/notification.module';
+
 
 require('dotenv').config();
 Logger.log('neo4j PORT :' + process.env.PORT, 'appModule');
@@ -25,7 +25,6 @@ Logger.log('neo4j User Name :' + environment.username, 'appModule');
       username: environment.username,
       password: process.env.PASSWORD,
     }),
-    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService, CommonService],
