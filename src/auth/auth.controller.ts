@@ -12,14 +12,21 @@ export class AuthController {
     return this.authService.create(createAuthDto);
   }
 
+
   @Post('send')
-  async sendNotification(
-    @Body('token') token: string,
-    @Body('title') title: string,
-    @Body('body') body: string,
-  ) {
-    await this.authService.sendNotificationToDevice(token, title, body);
-    return { success: true, message: 'Notification sent successfully' };
+  sendNotification(@Body() token: string, title: string, body: string) {
+    return this.authService.sendNotificationToDevice(token,title,body);
   }
+
+
+  // @Post('send')
+  // async sendNotification(
+  //   @Body('token') token: string,
+  //   @Body('title') title: string,
+  //   @Body('body') body: string,
+  // ) {
+  //   await this.authService.sendNotificationToDevice(token, title, body);
+  //   return { success: true, message: 'Notification sent successfully' };
+  // }
  
 }
