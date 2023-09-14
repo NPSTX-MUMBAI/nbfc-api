@@ -10,13 +10,23 @@ export class PlanService {
   constructor(private plan: PlanRepository, private common: CommonService) {}
   async createPlan(body: CreatePlanDto) {
     try {
-      const query = await this.plan.createPlan(body);
-      return query;
+      const match = await this.common.match(
+        'account',
+        'accountId',
+        body.accountId,
+      );
+      if (match.status) {
+        const query = await this.plan.createPlan(body);
+        return query;
+      } else {
+        return { data: null, status: false, msg: response.NotFound };
+      }
     } catch (error) {
       Logger.log('error' + error, 'planService');
       return { res: error, status: false, msg: 'error occurred !' };
     }
   }
+
   async GetAccount() {
     try {
       const Query = await this.common.matchNode('account');

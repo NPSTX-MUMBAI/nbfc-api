@@ -12,6 +12,7 @@ export class CreatePlanDto {
   mobileNo: string;
   email: string;
   status: status;
+  accountId: string;
 }
 
 
