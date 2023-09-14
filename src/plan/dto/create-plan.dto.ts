@@ -2,9 +2,6 @@ export class CreatePlanDto {
   emiDate: string;
   disbursementAmount: string;
   emiAmount: string;
-  startDate: string;
-  endDate: string;
-  dueDate: string;
   address: string;
   loanType: string;
   firstName: string;
@@ -13,6 +10,9 @@ export class CreatePlanDto {
   email: string;
   status: status;
   accountId: string;
+  LoanStartDate: string;
+  LoanEndDate: string;
+  emiDueDate: string;
 }
 
 
