@@ -5,4 +5,5 @@ export class createAutoPay {
   vpa: string;
   accountId: string;
   frequency: string;
+  debitDay: string;
 }

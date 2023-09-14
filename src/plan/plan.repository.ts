@@ -76,7 +76,8 @@ export class PlanRepository {
           amount: $amount,
           vpa: $vpa, 
           frequency: $frequency,
-          status: "PENDING"
+          status: "PENDING",
+          debitDay: data.debitDay
       }
       set a +={
         status: "PENDING"
@@ -89,6 +90,7 @@ export class PlanRepository {
           vpa: data.vpa,
           accountId: data.accountId,
           frequency: data.frequency,
+          debitDay: data.debitDay,
         },
       );
       let obj = {

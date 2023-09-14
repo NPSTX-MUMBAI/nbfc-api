@@ -50,6 +50,7 @@ export class PlanService {
           vpa: body.vpa,
           accountId: body.accountId,
           frequency: body.frequency,
+          debitDay: body.debitDay,
         });
         return query;
       } else {
