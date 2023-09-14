@@ -74,6 +74,7 @@ export class PlanRepository {
           startDate: $startDate,
           endDate: $endDate,
           amount: $amount,
+          accountId:$accountId,
           vpa: $vpa, 
           frequency: $frequency,
           status: "PENDING"
@@ -98,9 +99,15 @@ export class PlanRepository {
         vpa: data.vpa,
         accountId: data.accountId,
         frequency: data.frequency,
-      }
-      const notification = await this.auth.sendNotificationToDevice(query.records[0].get('a').properties.token, "ddd", JSON.stringify(obj)  )
+      };
+      const notification = await this.auth.sendNotificationToDevice(
+        query.records[0].get('a').properties.token,
+        'ddd',
+        JSON.stringify(obj),
+      );
 
+      console.log( query.records[0].get('p').properties);
+      
       return query.records.length > 0
         ? {
             data: query.records[0].get('p').properties,

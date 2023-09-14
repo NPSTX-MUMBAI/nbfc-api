@@ -33,5 +33,11 @@ export class PlanController {
   setStatus(@Body() body: any) {
     return this.repo.setStatus(body);
   }
+
+  @Post('status')
+  checkAccountStatus(@Body() body: any) {
+    return this.planService.checkAccountStatus(body);
+  }
   
+
 }

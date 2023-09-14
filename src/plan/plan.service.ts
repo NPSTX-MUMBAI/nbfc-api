@@ -79,4 +79,13 @@ export class PlanService {
       return { res: error, status: false, msg: response.Error };
     }
   }
+
+  async checkAccountStatus(body : any) {
+    try {
+      const match = await this.common.match('account','accountId',body.accountId)
+      return { status: match.data.status}
+    } catch (error) {
+      return error
+    }
+}
 }
