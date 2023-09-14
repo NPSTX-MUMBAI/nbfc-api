@@ -10,8 +10,8 @@ export class CreatePlanDto {
   email: string;
   status: status;
   accountId: string;
-  LoanStartDate: string;
-  LoanEndDate: string;
+  loanStartDate: string;
+  loanEndDate: string;
   emiDueDate: string;
 }
 
