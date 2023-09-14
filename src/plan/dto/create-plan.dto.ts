@@ -20,4 +20,5 @@ export enum status {
     'INACTIVE' = 'INACTIVE',
     'ACTIVE' = 'ACTIVE',
     'PENDING' = 'PENDING',
+    'REJECTED' = 'REJECTED',
   }
