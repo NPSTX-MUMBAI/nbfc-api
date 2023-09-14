@@ -91,6 +91,7 @@ export class PlanRepository {
           accountId: data.accountId,
           frequency: data.frequency,
           debitDay: data.debitDay,
+          remark: data.remark
         },
       );
       let obj = {

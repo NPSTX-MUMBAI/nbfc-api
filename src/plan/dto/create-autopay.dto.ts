@@ -6,4 +6,5 @@ export class createAutoPay {
   accountId: string;
   frequency: string;
   debitDay: string;
+  remark: string;
 }

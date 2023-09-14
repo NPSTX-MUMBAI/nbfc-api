@@ -51,6 +51,7 @@ export class PlanService {
           accountId: body.accountId,
           frequency: body.frequency,
           debitDay: body.debitDay,
+          remark: body.remark,
         });
         return query;
       } else {
