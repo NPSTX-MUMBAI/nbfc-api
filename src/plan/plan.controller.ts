@@ -28,5 +28,10 @@ export class PlanController {
   setToken(@Body() body: any) {
     return this.repo.SetToken(body);
   }
+
+  @Post('set/status')
+  setStatus(@Body() body: any) {
+    return this.repo.setStatus(body);
+  }
   
 }
