@@ -22,8 +22,8 @@ export class PlanService {
         return { data: null, status: false, msg: response.NotFound };
       }
     } catch (error) {
-      Logger.log('error' + error, 'planService');
-      return { res: error, status: false, msg: 'error occurred !' };
+      Logger.log(response.Error + error, 'planService');
+      return { res: error, status: false, msg: response.Error };
     }
   }
 
@@ -32,8 +32,8 @@ export class PlanService {
       const Query = await this.common.matchNode('account');
       return Query;
     } catch (error) {
-      Logger.log('error' + error, 'planRepository');
-      return { res: error, status: false, msg: 'error occurred !' };
+      Logger.log(response.Error + error, 'planService');
+      return { res: error, status: false, msg: response.Error };
     }
   }
 
@@ -58,8 +58,8 @@ export class PlanService {
         return { data: null, status: false, msg: response.NotFound };
       }
     } catch (error) {
-      Logger.log('error' + error, 'planRepository');
-      return { res: error, status: false, msg: 'error occurred !' };
+      Logger.log(response.Error + error, 'planService');
+      return { res: error, status: false, msg: response.Error };
     }
   }
 }
