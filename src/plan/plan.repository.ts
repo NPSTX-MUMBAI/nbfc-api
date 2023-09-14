@@ -137,6 +137,7 @@ export class PlanRepository {
 
   async SetToken(body: any) {
     try {
+      console.log(' in set token');
       const query = await this.neo.write(
         `match (a:account) set a.token = $token return a`,
         { token: body.token },
