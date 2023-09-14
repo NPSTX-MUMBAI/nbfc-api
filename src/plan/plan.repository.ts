@@ -6,10 +6,11 @@ import {
   generateRandomNumber,
 } from 'src/constant/number';
 import { createAutoPay } from './dto/create-autopay.dto';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class PlanRepository {
-  constructor(private neo: Neo4jService) {}
+  constructor(private neo: Neo4jService, private auth: AuthService) {}
 
   async createPlan(body: CreatePlanDto) {
     try {
@@ -64,7 +65,7 @@ export class PlanRepository {
     }
   }
 
-  async createAutoPay(body: createAutoPay) {
+  async createAutoPay(data: createAutoPay) {
     try {
       const query = await this.neo.write(
         `match (a:account {accountId: $accountId}) 
@@ -74,24 +75,56 @@ export class PlanRepository {
           endDate: $endDate,
           amount: $amount,
           vpa: $vpa, 
-          frequency: $frequency
+          frequency: $frequency,
+          status: "PENDING"
       }
       set a +={
         status: "PENDING"
       }
       return a, p`,
         {
-          startDate: body.startDate,
-          endDate: body.endDate,
-          amount: body.amount,
-          vpa: body.vpa,
-          accountId: body.accountId,
-          frequency: body.frequency,
+          startDate: data.startDate,
+          endDate: data.endDate,
+          amount: data.amount,
+          vpa: data.vpa,
+          accountId: data.accountId,
+          frequency: data.frequency,
         },
       );
+      let obj = {
+        startDate: data.startDate,
+        endDate: data.endDate,
+        amount: data.amount,
+        vpa: data.vpa,
+        accountId: data.accountId,
+        frequency: data.frequency,
+      }
+      const notification = await this.auth.sendNotificationToDevice(query.records[0].get('a').properties.token, "ddd", JSON.stringify(obj)  )
+
       return query.records.length > 0
         ? {
             data: query.records[0].get('p').properties,
+            status: true,
+            msg: 'success',
+          }
+        : { data: null, status: false, msg: 'failed' };
+    } catch (error) {
+      Logger.log('error' + error, 'planRepository');
+      return { res: error, status: false, msg: 'error occurred !' };
+    }
+  }
+
+  async setStatus(body: any) {
+    try {
+      const query = await this.neo.write(
+        `match (a:account {accountId: $accountId}) -[:HAS_AUTOPAY]->(p:autoPay)
+        set a.status=  $status, p.status= $status
+        return a,p `,
+        { accountId: body.accountId, status: body.status },
+      );
+      return query.records.length > 0
+        ? {
+            data: query.records[0].get('a').properties,
             status: true,
             msg: 'success',
           }

@@ -10,17 +10,8 @@ export class PlanService {
   constructor(private plan: PlanRepository, private common: CommonService) {}
   async createPlan(body: CreatePlanDto) {
     try {
-      const match = await this.common.match(
-        'account',
-        'accountId',
-        body.accountId,
-      );
-      if (match.status) {
         const query = await this.plan.createPlan(body);
         return query;
-      } else {
-        return { data: null, status: false, msg: response.NotFound };
-      }
     } catch (error) {
       Logger.log(response.Error + error, 'planService');
       return { res: error, status: false, msg: response.Error };
@@ -53,6 +44,25 @@ export class PlanService {
           accountId: body.accountId,
           frequency: body.frequency,
         });
+        return query;
+      } else {
+        return { data: null, status: false, msg: response.NotFound };
+      }
+    } catch (error) {
+      Logger.log(response.Error + error, 'planService');
+      return { res: error, status: false, msg: response.Error };
+    }
+  }
+
+  async setStatus(body: any) {
+    try {
+      const match = await this.common.match(
+        'account',
+        'accountId',
+        body.accountId,
+      );
+      if (match.status) {
+        const query = await this.plan.setStatus(body);
         return query;
       } else {
         return { data: null, status: false, msg: response.NotFound };

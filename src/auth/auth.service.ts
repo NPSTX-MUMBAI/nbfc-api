@@ -10,7 +10,7 @@ export class AuthService {
   }
 
 
-  async sendNotificationToDevice(token: string, title: string, body: string) {
+  async sendNotificationToDevice(token: string, title: string, body:any) {
     const message = {
       notification: {
         title,

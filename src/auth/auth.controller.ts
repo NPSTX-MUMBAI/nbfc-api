@@ -16,7 +16,7 @@ export class AuthController {
   async sendNotification(
     @Body('token') token: string,
     @Body('title') title: string,
-    @Body('body') body: string,
+    @Body('body') body: any,
   ) {
     await this.authService.sendNotificationToDevice(token, title, body);
     return { success: true, message: 'Notification sent successfully' };
