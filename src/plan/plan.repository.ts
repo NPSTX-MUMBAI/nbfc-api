@@ -101,6 +101,7 @@ export class PlanRepository {
         vpa: data.vpa,
         accountId: data.accountId,
         frequency: data.frequency,
+        remark: data.remark
       };
       const notification = await this.auth.sendNotificationToDevice(
         query.records[0].get('a').properties.token,
