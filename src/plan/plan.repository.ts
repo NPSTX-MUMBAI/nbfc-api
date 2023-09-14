@@ -74,7 +74,6 @@ export class PlanRepository {
           startDate: $startDate,
           endDate: $endDate,
           amount: $amount,
-          accountId:$accountId,
           vpa: $vpa, 
           frequency: $frequency,
           status: "PENDING"
@@ -111,6 +110,7 @@ export class PlanRepository {
       return query.records.length > 0
         ? {
             data: query.records[0].get('p').properties,
+            accountId: data.accountId,
             status: true,
             msg: 'success',
           }
