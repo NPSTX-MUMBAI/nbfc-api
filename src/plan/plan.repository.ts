@@ -77,7 +77,7 @@ export class PlanRepository {
           vpa: $vpa, 
           frequency: $frequency,
           status: "PENDING",
-          debitDay: data.debitDay
+          debitDay: $debitDay
       }
       set a +={
         status: "PENDING"
