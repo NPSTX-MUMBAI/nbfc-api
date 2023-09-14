@@ -3,10 +3,11 @@ import { PlanService } from './plan.service';
 import { CreatePlanDto } from './dto/create-plan.dto';
 import { plan } from 'src/routes/routes';
 import { createAutoPay } from './dto/create-autopay.dto';
+import { PlanRepository } from './plan.repository';
 
 @Controller(plan.Controller)
 export class PlanController {
-  constructor(private readonly planService: PlanService) {}
+  constructor(private readonly planService: PlanService, private repo: PlanRepository) {}
 
   @Post(plan.CreateAccount)
   createPlan(@Body() body: CreatePlanDto) {
@@ -23,8 +24,9 @@ export class PlanController {
     return this.planService.GetAccount();
   }
 
-  @Get("test")
-  test() {
-    return this.planService.GetAccount();
+  @Post('test')
+  setToken(@Body() body: any) {
+    return this.repo.SetToken(body);
   }
+  
 }

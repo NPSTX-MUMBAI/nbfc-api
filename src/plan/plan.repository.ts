@@ -90,12 +90,31 @@ export class PlanRepository {
         },
       );
       return query.records.length > 0
-      ? {
-          data: query.records[0].get('p').properties,
-          status: true,
-          msg: 'success',
-        }
-      : { data: null, status: false, msg: 'failed' };
+        ? {
+            data: query.records[0].get('p').properties,
+            status: true,
+            msg: 'success',
+          }
+        : { data: null, status: false, msg: 'failed' };
+    } catch (error) {
+      Logger.log('error' + error, 'planRepository');
+      return { res: error, status: false, msg: 'error occurred !' };
+    }
+  }
+
+  async SetToken(body: any) {
+    try {
+      const query = await this.neo.write(
+        `match (a:account) set a.token = $token return a`,
+        { token: body.token },
+      );
+      return query.records.length > 0
+        ? {
+            data: query.records[0].get('a').properties,
+            status: true,
+            msg: 'success',
+          }
+        : { data: null, status: false, msg: 'failed' };
     } catch (error) {
       Logger.log('error' + error, 'planRepository');
       return { res: error, status: false, msg: 'error occurred !' };

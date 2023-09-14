@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 
 import admin from './firebase-admin.service';
@@ -21,9 +21,9 @@ export class AuthService {
 
     try {
       const response = await admin.messaging().send(message);
-      console.log('Successfully sent notification:', response);
+      Logger.log('Successfully sent notification:' + response, 'authService');
     } catch (error) {
-      console.error('Error sending notification:', error);
+      console.error('Error sending notification:' + error, 'authService');
     }
   }
   
