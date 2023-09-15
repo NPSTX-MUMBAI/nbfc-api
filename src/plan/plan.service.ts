@@ -2,8 +2,10 @@ import { Injectable, Logger } from '@nestjs/common';
 import { CreatePlanDto } from './dto/create-plan.dto';
 import { PlanRepository } from './plan.repository';
 import { CommonService } from 'src/common/common.service';
-import { response } from 'src/filters/response';
+import { response, serviceConstants } from 'src/filters/response';
 import { createAutoPay } from './dto/create-autopay.dto';
+import * as XLSX from 'xlsx';
+import { generateRandomString, generateRandomNumber } from 'src/constant/number';
 
 @Injectable()
 export class PlanService {
@@ -82,12 +84,55 @@ export class PlanService {
     }
   }
 
-  async checkAccountStatus(body : any) {
+  async checkAccountStatus(body: any) {
     try {
-      const match = await this.common.match('account','accountId',body.accountId)
-      return { status: match.data.status}
+      const match = await this.common.match(
+        'account',
+        'accountId',
+        body.accountId,
+      );
+      return { status: match.data.status };
     } catch (error) {
-      return error
+      return error;
     }
-}
+  }
+
+  async bulkUpload(file: any, body: any) {
+    try {
+      Logger.verbose(file, 'data');
+      const workbook = XLSX.read(file.buffer, { type: 'buffer' });
+      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      const data: any[] = XLSX.utils.sheet_to_json(worksheet);
+      let count = 0;
+
+      Logger.verbose(data, body, 'found');
+      for (const item of data) {
+          const accountId = generateRandomString(10);
+          const accountNo = generateRandomNumber();
+          const query2 = await this.plan.createPlan({
+            accountId: accountId,
+            accountNo: accountNo,
+            emiDate: item.emiDate,
+            disbursementAmount: item.disbursementAmount,
+            emiAmount: item.emiAmount,
+            loanStartDate: item.loanStartDate,
+            loanEndDate: item.loanEndDate,
+            emiDueDate: item.emiDueDate,
+            address: item.address,
+            loanType: item.loanType,
+            firstName: item.firstName,
+            lastName: item.lastName,
+            mobileNo: item.mobileNo,
+            email: item.email,
+          });
+          return query2
+        }
+        if (count == data.length) {
+          return { msg: response.Success, status: true };
+        }
+    } catch (error) {
+      Logger.error(response.Error);
+      return error;
+    }
+  }
 }
