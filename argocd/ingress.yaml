@@ -1,0 +1,54 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nbfc-api-cert  #name of this object
+  namespace: prod #same namespace as 
+spec:
+  dnsNames:
+    - nbfc-api.timepayx.com
+  secretName: nbfc-api-tls-cert
+  issuerRef:
+    name: le-clusterissuer
+    kind: ClusterIssuer
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/websocket-services: "nbfc-api-service"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-buffer-connect: 300s
+    nginx.ingress.kubernetes.io/proxy-buffer-size: 422k
+    nginx.ingress.kubernetes.io/proxy-buffering: 'on'
+    nginx.ingress.kubernetes.io/proxy-buffers-number: '8'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "36000"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "36000"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "36000"
+  
+    
+  name: nbfc-api-rewrite
+  namespace: prod
+spec:
+  #ingressClassName: nginx
+  tls:
+  - hosts:
+    - nbfc-api.timepayx.com
+    secretName: nbfc-api-tls-cert
+  rules:
+  - host: nbfc-api.timepayx.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nbfc-api-service
+            port:
+              number: 3000

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nbfc-api
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nbfc-api
+      role: nbfc-api
+  template:
+    metadata:
+      labels:
+        app: nbfc-api
+        role: nbfc-api
+    spec:
+      containers:
+      - name: nbfc-api
+        image: ghcr.io/npstx-mumbai/nbfc-api-neo4j:1.1.54-test
+        imagePullPolicy: Always
+       # resources:
+          # requests:
+# #            # cpu: 100m
+           #  memory: 1G
+          # limits:
+#            # cpu: 100m
+           # memory: 3G
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+      - name: dockerconfigjson-github-com
