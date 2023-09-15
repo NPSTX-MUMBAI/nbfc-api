@@ -27,6 +27,6 @@ spec:
 #            # cpu: 100m
            # memory: 3G
         ports:
-        - containerPort: 3000
+        - containerPort: 3002
       imagePullSecrets:
       - name: dockerconfigjson-github-com
