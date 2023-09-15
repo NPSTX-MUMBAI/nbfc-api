@@ -105,7 +105,7 @@ export class PlanService {
       const data: any[] = XLSX.utils.sheet_to_json(worksheet);
       let count = 0;
 
-      Logger.verbose(data, body, 'found');
+      Logger.verbose(data,  'found');
       for (const item of data) {
           const accountId = generateRandomString(10);
           const accountNo = generateRandomNumber();
@@ -125,7 +125,6 @@ export class PlanService {
             mobileNo: item.mobileNo,
             email: item.email,
           });
-          return query2
         }
         if (count == data.length) {
           return { msg: response.Success, status: true };
