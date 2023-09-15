@@ -8,11 +8,12 @@ export class CreatePlanDto {
   lastName: string;
   mobileNo: string;
   email: string;
-  status: status;
+  status?: status;
   accountId: string;
   loanStartDate: string;
   loanEndDate: string;
   emiDueDate: string;
+  accountNo: number;
 }
 
 
