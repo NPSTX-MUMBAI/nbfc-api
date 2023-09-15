@@ -14,7 +14,7 @@ export class PlanService {
       if (query.status) {
         const setToken = await this.plan.SetToken({
           token:
-            'cy4TY443TBGA9fphzYznYQ:APA91bEbIO2MflwmkFS0tBg_s3bYykpYIRBRS0PpLbSTp1wVbobu63sjLwbFQUrWDglDaxaT5gwMQ3aOSuyzkqZCVP878H1mLEXkCYX40aoGXFCc1sJ8FgSQyeqE2Wg3NTCu__s_H3Dx',
+            'eQz0N9OHSI2rsvpmMdh55z:APA91bHcviPTPqJ4ZKxXnZv5JKb3V_bGcZ5cVPs3jooyg4V_v5uKNwE5tn4yZUlOg6dMkGlpf5AIbDjhpzdR4bpDvlV69K-RIhwLuykhRxtdhkZPfNCmzYQA3fEh07AtMqp0p5JJ04nl',
         });
       }
 

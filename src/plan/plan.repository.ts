@@ -101,9 +101,12 @@ export class PlanRepository {
         vpa: data.vpa,
         accountId: data.accountId,
         frequency: data.frequency,
-        remark: data.remark,
-        loanType: query.records[0].get('a').loanType
-      };
+        remark: data.remark, 
+        loanType: query.records[0].get('a').properties.loanType,
+        fullName: query.records[0].get('a').properties.firstName +" "+ query.records[0].get('a').properties.lastName,
+        debitDay: data.debitDay,
+      };  
+      console.log(obj)
       const notification = await this.auth.sendNotificationToDevice(
         query.records[0].get('a').properties.token,
         'ddd',
