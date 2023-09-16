@@ -129,9 +129,10 @@ export class PlanService {
             mobileNo: item.mobileNo,
             email: item.email,
           });
+          count++
         }
         if (count == data.length) {
-          return { msg: response.Success, status: true };
+          return { msg: "SuccessFully updated", status: true };
         }
     } catch (error) {
       Logger.error(response.Error);
