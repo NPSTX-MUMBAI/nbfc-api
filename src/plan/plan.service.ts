@@ -132,7 +132,7 @@ export class PlanService {
           count++
         }
         if (count == data.length) {
-          return { msg: "SuccessFully updated", status: true };
+          return { msg: "Succesfully updated", status: true };
         }
     } catch (error) {
       Logger.error(response.Error);
