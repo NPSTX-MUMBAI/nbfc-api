@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nbfc-api
-        image: ghcr.io/npstx-mumbai/nbfc-api:1.0.1-test
+        image: ghcr.io/npstx-mumbai/nbfc-api:1.0.2-test
         imagePullPolicy: Always
        # resources:
           # requests:
