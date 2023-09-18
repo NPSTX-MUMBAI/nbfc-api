@@ -31,18 +31,23 @@ export class PlanController {
     return this.repo.SetToken(body);
   }
 
-  @Post('set/status')
+  @Post(plan.SetAccountStatus)
   setStatus(@Body() body: any) {
     return this.repo.setStatus(body);
   }
 
-  @Post('status')
+  @Post(plan.SetAccountStatusDisabled)
+  setStatusDisable(@Body() body: any) {
+    return this.repo.setStatus(body);
+  }
+
+  @Post(plan.status)
   checkAccountStatus(@Body() body: any) {
     return this.planService.checkAccountStatus(body);
   }
   
 
-  @Post('upload')
+  @Post(plan.upload)
   @UseInterceptors(FileInterceptor('file'))
   async uploadExcel(@UploadedFile() file, @Body() body: any) {
     console.log(file);

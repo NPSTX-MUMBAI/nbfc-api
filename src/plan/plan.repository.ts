@@ -8,6 +8,7 @@ import {
 import { createAutoPay } from './dto/create-autoPay.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { setAccountStatus } from './dto/set-account-status.dto';
+import { setStatusDisable } from './dto/set-status-disable.dto';
 
 @Injectable()
 export class PlanRepository {
@@ -92,30 +93,33 @@ export class PlanRepository {
           accountId: data.accountId,
           frequency: data.frequency,
           debitDay: data.debitDay,
-          remark: data.remark
+          remark: data.remark,
         },
       );
-      let obj = {
+      const obj = {
         startDate: data.startDate,
         endDate: data.endDate,
         amount: data.amount,
         vpa: data.vpa,
         accountId: data.accountId,
         frequency: data.frequency,
-        remark: data.remark, 
+        remark: data.remark,
         loanType: query.records[0].get('a').properties.loanType,
-        fullName: query.records[0].get('a').properties.firstName +" "+ query.records[0].get('a').properties.lastName,
+        fullName:
+          query.records[0].get('a').properties.firstName +
+          ' ' +
+          query.records[0].get('a').properties.lastName,
         debitDay: data.debitDay,
-      };  
-      console.log(obj)
+      };
+      console.log(obj);
       const notification = await this.auth.sendNotificationToDevice(
         query.records[0].get('a').properties.token,
         'ddd',
         JSON.stringify(obj),
       );
 
-      console.log( query.records[0].get('p').properties);
-      
+      console.log(query.records[0].get('p').properties);
+
       return query.records.length > 0
         ? {
             data: query.records[0].get('p').properties,
@@ -157,6 +161,27 @@ export class PlanRepository {
       const query = await this.neo.write(
         `match (a:account) set a.token = $token return a`,
         { token: body.token },
+      );
+      return query.records.length > 0
+        ? {
+            data: query.records[0].get('a').properties,
+            status: true,
+            msg: 'success',
+          }
+        : { data: null, status: false, msg: 'failed' };
+    } catch (error) {
+      Logger.log('error' + error, 'planRepository');
+      return { res: error, status: false, msg: 'error occurred !' };
+    }
+  }
+
+  async setDisable(body: setStatusDisable) {
+    try {
+      const query = await this.neo.write(
+        `match (a:account {accountId: $accountId}) -[:HAS_AUTOPAY]->(p:autoPay)
+        set a.status= "INACTIVE", p.status= "INACTIVE"
+        return a,p `,
+        { accountId: body.accountId },
       );
       return query.records.length > 0
         ? {

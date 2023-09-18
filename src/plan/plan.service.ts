@@ -11,6 +11,7 @@ import {
 } from 'src/constant/number';
 import { setAccountStatus } from './dto/set-account-status.dto';
 import { checkAccountStatus } from './dto/check-autoPay-status.dto';
+import { setStatusDisable } from './dto/set-status-disable.dto';
 
 @Injectable()
 export class PlanService {
@@ -155,6 +156,30 @@ export class PlanService {
       }
     } catch (error) {
       Logger.error(response.Error);
+      return { res: error, status: false, msg: response.Error };
+    }
+  }
+
+
+  async setDisable(body: setStatusDisable) {
+    try {
+      Logger.verbose('accountId :' + body.accountId, 'planService');
+      const match = await this.common.match(
+        'account',
+        'accountId',
+        body.accountId,
+      );
+      Logger.log('match status :' + match.status, 'planService');
+      if (match.status) {
+        const query = await this.plan.setDisable(body);
+        Logger.log('query status : ' + query.status, 'planService');
+        return query;
+      } else {
+        Logger.warn('match status :' + match.status, 'planService');
+        return { data: null, status: false, msg: response.NotFound };
+      }
+    } catch (error) {
+      Logger.error(response.Error + error, 'planService');
       return { res: error, status: false, msg: response.Error };
     }
   }
