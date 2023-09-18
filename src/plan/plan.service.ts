@@ -129,19 +129,19 @@ export class PlanService {
       for (const item of data) {
         const accountId = generateRandomString(10);
         const accountNo = generateRandomNumber();
-        const loanStartDate: string = item.loanStartDate;
-        const loanEndDate: string = item.loanEndDate;
-        const emiDueDate: string = item.emiDueDate;
-        const emiDate: string = item.emiDate;
+        // const loanStartDate: string = item.loanStartDate;
+        // const loanEndDate: string = item.loanEndDate;
+        // const emiDueDate: string = item.emiDueDate;
+        // const emiDate: string = item.emiDate;
         const query2 = await this.plan.createPlan({
           accountId: accountId,
           accountNo: accountNo,
-          emiDate: emiDate,
+          emiDate: item.emiDate,
           disbursementAmount: item.disbursementAmount,
           emiAmount: item.emiAmount,
-          loanStartDate: loanStartDate,
-          loanEndDate: loanEndDate,
-          emiDueDate: emiDueDate,
+          loanStartDate: item.loanStartDate,
+          loanEndDate: item.loanEndDate,
+          emiDueDate: item.emiDueDate,
           address: item.address,
           loanType: item.loanType,
           firstName: item.firstName,
