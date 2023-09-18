@@ -33,7 +33,7 @@ export class PlanController {
 
   @Post(plan.SetAccountStatus)
   setStatus(@Body() body: any) {
-    return this.repo.setStatus(body);
+    return this.planService.setStatus(body);
   }
 
   @Post(plan.SetAccountStatusDisabled)
