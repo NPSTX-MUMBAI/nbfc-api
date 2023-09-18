@@ -5,15 +5,21 @@ import { CommonService } from 'src/common/common.service';
 import { response, serviceConstants } from 'src/filters/response';
 import { createAutoPay } from './dto/create-autopay.dto';
 import * as XLSX from 'xlsx';
-import { generateRandomString, generateRandomNumber } from 'src/constant/number';
+import {
+  generateRandomString,
+  generateRandomNumber,
+} from 'src/constant/number';
 
 @Injectable()
 export class PlanService {
   constructor(private plan: PlanRepository, private common: CommonService) {}
   async createPlan(body: CreatePlanDto) {
+    Logger.verbose('data :' + body, 'planService');
     try {
       const query = await this.plan.createPlan(body);
+      Logger.log('query : ' + query, 'planService');
       if (query.status) {
+        Logger.log('Setting up Token : ' + query.status, 'planService');
         const setToken = await this.plan.SetToken({
           token:
             'eQz0N9OHSI2rsvpmMdh55z:APA91bHcviPTPqJ4ZKxXnZv5JKb3V_bGcZ5cVPs3jooyg4V_v5uKNwE5tn4yZUlOg6dMkGlpf5AIbDjhpzdR4bpDvlV69K-RIhwLuykhRxtdhkZPfNCmzYQA3fEh07AtMqp0p5JJ04nl',
@@ -22,7 +28,7 @@ export class PlanService {
 
       return query;
     } catch (error) {
-      Logger.log(response.Error + error, 'planService');
+      Logger.error(response.Error + error, 'planService');
       return { res: error, status: false, msg: response.Error };
     }
   }
@@ -30,20 +36,23 @@ export class PlanService {
   async GetAccount() {
     try {
       const Query = await this.common.matchNode('account');
+      Logger.log('status :' + Query.status, 'planService');
       return Query;
     } catch (error) {
-      Logger.log(response.Error + error, 'planService');
+      Logger.error(response.Error + error, 'planService');
       return { res: error, status: false, msg: response.Error };
     }
   }
 
   async CreateAutoPay(body: createAutoPay) {
     try {
+      Logger.verbose('accountId :' + body.accountId, 'planService');
       const match = await this.common.match(
         'account',
         'accountId',
         body.accountId,
       );
+      Logger.log('match status :' + match.status, 'planService');
       if (match.status) {
         const query = this.plan.createAutoPay({
           startDate: body.startDate,
@@ -57,43 +66,51 @@ export class PlanService {
         });
         return query;
       } else {
+        Logger.warn('match status :' + match.status, 'planService');
         return { data: null, status: false, msg: response.NotFound };
       }
     } catch (error) {
-      Logger.log(response.Error + error, 'planService');
+      Logger.error(response.Error + error, 'planService');
       return { res: error, status: false, msg: response.Error };
     }
   }
 
   async setStatus(body: any) {
     try {
+      Logger.verbose('accountId :' + body.accountId, 'planService');
       const match = await this.common.match(
         'account',
         'accountId',
         body.accountId,
       );
+      Logger.log('match status :' + match.status, 'planService');
       if (match.status) {
         const query = await this.plan.setStatus(body);
+        Logger.log('query status : ' + query.status, 'planService');
         return query;
       } else {
+        Logger.warn('match status :' + match.status, 'planService');
         return { data: null, status: false, msg: response.NotFound };
       }
     } catch (error) {
-      Logger.log(response.Error + error, 'planService');
+      Logger.error(response.Error + error, 'planService');
       return { res: error, status: false, msg: response.Error };
     }
   }
 
   async checkAccountStatus(body: any) {
     try {
+      Logger.verbose('accountId :' + body.accountId, 'planService');
       const match = await this.common.match(
         'account',
         'accountId',
         body.accountId,
       );
-      return { status: match.data.status };
+      Logger.log('match status :' + match.status, 'planService');
+      return { status: match.data.status, msg: response.Success };
     } catch (error) {
-      return error;
+      Logger.error(response.Error + error, 'planService');
+      return { res: error, status: false, msg: response.Error };
     }
   }
 
@@ -105,35 +122,35 @@ export class PlanService {
       const data: any[] = XLSX.utils.sheet_to_json(worksheet);
       let count = 0;
 
-      Logger.verbose(data,  'found');
+      Logger.verbose(data, 'found');
       for (const item of data) {
-          const accountId = generateRandomString(10);
-          const accountNo = generateRandomNumber();
-          let loanStartDate:any=new Date(item.loanStartDate).getTime();
-          let loanEndDate:any=new Date(item.loanEndDate).getTime();
-          let emiDueDate:any=new Date(item.emiDueDate).getTime();
-          let emiDate:any=new Date(item.emiDate).getTime();
-          const query2 = await this.plan.createPlan({
-            accountId: accountId,
-            accountNo: accountNo,
-            emiDate: emiDate,
-            disbursementAmount: item.disbursementAmount,
-            emiAmount: item.emiAmount,
-            loanStartDate:loanStartDate,
-            loanEndDate: loanEndDate,
-            emiDueDate:emiDueDate ,
-            address: item.address,
-            loanType: item.loanType,  
-            firstName: item.firstName,
-            lastName: item.lastName,
-            mobileNo: item.mobileNo,
-            email: item.email,
-          });
-          count++
-        }
-        if (count == data.length) {
-          return { msg: "Succesfully updated", status: true };
-        }
+        const accountId = generateRandomString(10);
+        const accountNo = generateRandomNumber();
+        const loanStartDate: any = new Date(item.loanStartDate).getTime();
+        const loanEndDate: any = new Date(item.loanEndDate).getTime();
+        const emiDueDate: any = new Date(item.emiDueDate).getTime();
+        const emiDate: any = new Date(item.emiDate).getTime();
+        const query2 = await this.plan.createPlan({
+          accountId: accountId,
+          accountNo: accountNo,
+          emiDate: emiDate,
+          disbursementAmount: item.disbursementAmount,
+          emiAmount: item.emiAmount,
+          loanStartDate: loanStartDate,
+          loanEndDate: loanEndDate,
+          emiDueDate: emiDueDate,
+          address: item.address,
+          loanType: item.loanType,
+          firstName: item.firstName,
+          lastName: item.lastName,
+          mobileNo: item.mobileNo,
+          email: item.email,
+        });
+        count++;
+      }
+      if (count == data.length) {
+        return { msg: response.Success, status: true };
+      }
     } catch (error) {
       Logger.error(response.Error);
       return error;
