@@ -155,7 +155,7 @@ export class PlanService {
       }
     } catch (error) {
       Logger.error(response.Error);
-      return error;
+      return { res: error, status: false, msg: response.Error };
     }
   }
 }
