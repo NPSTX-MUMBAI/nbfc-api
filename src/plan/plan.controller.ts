@@ -2,7 +2,7 @@ import { Controller, Post, Body, Get, UploadedFile, UseInterceptors } from '@nes
 import { PlanService } from './plan.service';
 import { CreatePlanDto } from './dto/create-plan.dto';
 import { plan } from 'src/routes/routes';
-import { createAutoPay } from './dto/create-autopay.dto';
+import { createAutoPay } from './dto/create-autoPay.dto';
 import { PlanRepository } from './plan.repository';
 import { FileInterceptor } from '@nestjs/platform-express';
 

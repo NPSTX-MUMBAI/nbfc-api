@@ -3,14 +3,14 @@ import { CreatePlanDto } from './dto/create-plan.dto';
 import { PlanRepository } from './plan.repository';
 import { CommonService } from 'src/common/common.service';
 import { response } from 'src/filters/response';
-import { createAutoPay } from './dto/create-autopay.dto';
+import { createAutoPay } from './dto/create-autoPay.dto';
 import * as XLSX from 'xlsx';
 import {
   generateRandomString,
   generateRandomNumber,
 } from 'src/constant/number';
 import { setAccountStatus } from './dto/set-account-status.dto';
-import { checkAccountStatus } from './dto/check-autopay-status.dto';
+import { checkAccountStatus } from './dto/check-autoPay-status.dto';
 
 @Injectable()
 export class PlanService {

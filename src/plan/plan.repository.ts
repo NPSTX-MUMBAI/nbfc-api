@@ -5,7 +5,7 @@ import {
   generateRandomString,
   generateRandomNumber,
 } from 'src/constant/number';
-import { createAutoPay } from './dto/create-autopay.dto';
+import { createAutoPay } from './dto/create-autoPay.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { setAccountStatus } from './dto/set-account-status.dto';
 
