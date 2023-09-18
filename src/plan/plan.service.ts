@@ -9,6 +9,8 @@ import {
   generateRandomString,
   generateRandomNumber,
 } from 'src/constant/number';
+import { setAccountStatus } from './dto/set-account-status.dto';
+import { checkAccountStatus } from './dto/check-autopay-status.dto';
 
 @Injectable()
 export class PlanService {
@@ -75,7 +77,7 @@ export class PlanService {
     }
   }
 
-  async setStatus(body: any) {
+  async setStatus(body: setAccountStatus) {
     try {
       Logger.verbose('accountId :' + body.accountId, 'planService');
       const match = await this.common.match(
@@ -98,7 +100,7 @@ export class PlanService {
     }
   }
 
-  async checkAccountStatus(body: any) {
+  async checkAccountStatus(body: checkAccountStatus) {
     try {
       Logger.verbose('accountId :' + body.accountId, 'planService');
       const match = await this.common.match(

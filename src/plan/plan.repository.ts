@@ -7,6 +7,7 @@ import {
 } from 'src/constant/number';
 import { createAutoPay } from './dto/create-autopay.dto';
 import { AuthService } from 'src/auth/auth.service';
+import { setAccountStatus } from './dto/set-account-status.dto';
 
 @Injectable()
 export class PlanRepository {
@@ -129,7 +130,7 @@ export class PlanRepository {
     }
   }
 
-  async setStatus(body: any) {
+  async setStatus(body: setAccountStatus) {
     try {
       const query = await this.neo.write(
         `match (a:account {accountId: $accountId}) -[:HAS_AUTOPAY]->(p:autoPay)
