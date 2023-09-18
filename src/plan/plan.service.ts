@@ -111,7 +111,7 @@ export class PlanService {
           const accountNo = generateRandomNumber();
           let loanStartDate:any=new Date(item.loanStartDate).getTime();
           let loanEndDate:any=new Date(item.loanEndDate).getTime();
-          let emidueDate:any=new Date(item.emiDueDate).getTime();
+          let emiDueDate:any=new Date(item.emiDueDate).getTime();
           let emiDate:any=new Date(item.emiDate).getTime();
           const query2 = await this.plan.createPlan({
             accountId: accountId,
@@ -121,7 +121,7 @@ export class PlanService {
             emiAmount: item.emiAmount,
             loanStartDate:loanStartDate,
             loanEndDate: loanEndDate,
-            emiDueDate:emidueDate ,
+            emiDueDate:emiDueDate ,
             address: item.address,
             loanType: item.loanType,  
             firstName: item.firstName,
