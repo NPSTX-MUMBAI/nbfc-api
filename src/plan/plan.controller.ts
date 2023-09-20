@@ -26,7 +26,7 @@ export class PlanController {
     return this.planService.GetAccount();
   }
 
-  @Post('test')
+  @Post('token')
   setToken(@Body() body: any) {
     return this.repo.SetToken(body);
   }
